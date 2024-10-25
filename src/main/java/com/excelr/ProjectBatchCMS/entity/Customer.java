@@ -9,6 +9,7 @@ import javax.persistence.Id;
 public class Customer {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cid;
 	private String firstname;
 	private String lastname;
