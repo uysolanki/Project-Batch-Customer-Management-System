@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -131,12 +130,12 @@ public class CustomerController {
 		return "redirect:/home";
 	}
 	
-	@PutMapping("/updateCustomer/{custid}")
-	public String updateCustomer(@PathVariable("custid") int cno, @RequestBody Customer newcust)
-	{
-		customerService.updateCustomer(cno,newcust);
-		return "Customer Record Updated";
-	}
+//	@PutMapping("/updateCustomer/{custid}")
+//	public String updateCustomer(@PathVariable("custid") int cno, @RequestBody Customer newcust)
+//	{
+//		customerService.updateCustomer(cno,newcust);
+//		return "Customer Record Updated";
+//	}
 	
 	
 	@RequestMapping("/registerCustomer")
@@ -145,6 +144,21 @@ public class CustomerController {
 		Customer c=new Customer();
 		model.addAttribute("cust", c);
 		return "customer-form";
+	}
+	
+	@RequestMapping("/updatecustomerform/{id}")
+	public String updateCustomerForm(@PathVariable("id") int cno, Model model)
+	{
+		Customer customer=customerService.getSingleCustomer(cno);
+		model.addAttribute("customer", customer);
+		return "customer-update-form";
+	}
+	
+	@PostMapping("/updatecustomer/{id}")
+	public String updateCustomer(@PathVariable("id") int cno,@ModelAttribute Customer customer)
+	{
+		customerService.updateCustomer(cno,customer);
+		return "redirect:/home";
 	}
 }
 
