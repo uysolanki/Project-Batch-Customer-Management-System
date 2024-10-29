@@ -48,11 +48,11 @@ public UserDetailsService mySetUserDetailsService() {
 @Override
 	protected void configure(HttpSecurity http) throws Exception {
 	http.authorizeRequests()
-    .antMatchers("/home","/addCustomerDataFromFE","/403").hasAnyAuthority("USER","ADMIN")
-    .antMatchers("/deleteSingleCustomer/**","/updatecustomerform/**").hasAuthority("ADMIN")
+    .antMatchers("/home","/addCustomerDataFromFE","/homepage","/403").hasAnyAuthority("USER","ADMIN")
+    .antMatchers("/deleteSingleCustomer/**","/updatecustomerform/**","/updatesupplierform/**","/deleteSingleSupplier/**").hasAuthority("ADMIN")
     .anyRequest().authenticated()
     .and()
-    .formLogin().loginProcessingUrl("/login").successForwardUrl("/home").permitAll()
+    .formLogin().loginProcessingUrl("/login").successForwardUrl("/homepage").permitAll()
     .and()
     .logout().logoutSuccessUrl("/login").permitAll()
     .and()

@@ -88,6 +88,11 @@ public class CustomerController {
 //		return customers;
 //	}
 	
+	@RequestMapping("/homepage")
+	public String homepage()
+	{
+		return "homepage";
+	}
 	@RequestMapping("/addCustomer")
 	public String addCustomer()
 	{
@@ -106,10 +111,10 @@ public class CustomerController {
 	public String addCustomer(@ModelAttribute Customer cust)
 	{
 		customerService.addCustomer(cust);
-		return "redirect:/home";
+		return "redirect:/customers";
 	}
 	
-	@RequestMapping("/home")
+	@RequestMapping("/customers")
 	public String getAllCustomers(Model model)
 	{
 		List<Customer> customers= customerService.getAllCustomers();
@@ -127,7 +132,7 @@ public class CustomerController {
 	public String deleteSingleCustomer(@PathVariable("id") int cno)
 	{
 		customerService.deleteSingleCustomer(cno);
-		return "redirect:/home";
+		return "redirect:/customers";
 	}
 	
 //	@PutMapping("/updateCustomer/{custid}")
@@ -158,7 +163,7 @@ public class CustomerController {
 	public String updateCustomer(@PathVariable("id") int cno,@ModelAttribute Customer customer)
 	{
 		customerService.updateCustomer(cno,customer);
-		return "redirect:/home";
+		return "redirect:/customers";
 	}
 	
 	@RequestMapping("/403")
